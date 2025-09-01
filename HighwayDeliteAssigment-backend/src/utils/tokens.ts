@@ -1,4 +1,4 @@
-import jwt, { Secret } from "jsonwebtoken";
+import jwt, { Secret, SignOptions } from "jsonwebtoken";
 
 const generateAccessToken = (user: any) => {
   return jwt.sign(
@@ -7,10 +7,10 @@ const generateAccessToken = (user: any) => {
       email: user.email,
       name: user.name,
     },
-    process.env.ACCESS_TOKEN_KEY as Secret, // assert type
+    process.env.ACCESS_TOKEN_KEY as Secret,
     {
-      expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "15m", // fallback to avoid undefined
-    }
+      expiresIn: (process.env.ACCESS_TOKEN_EXPIRY as string) || "15m",
+    } as SignOptions
   );
 };
 
@@ -21,8 +21,8 @@ const generateRefreshToken = (user: any) => {
     },
     process.env.REFRESH_TOKEN_KEY as Secret,
     {
-      expiresIn: process.env.REFRESH_TOKEN_EXPIRY || "7d",
-    }
+      expiresIn: (process.env.REFRESH_TOKEN_EXPIRY as string) || "7d",
+    } as SignOptions
   );
 };
 

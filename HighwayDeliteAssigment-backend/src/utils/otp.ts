@@ -23,14 +23,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Optional transporter event
-transporter.on("sent", (info) => {
-  console.log("Email sent:", info.response);
-  if (info.rejected.length > 0) {
-    console.log("Some recipients were rejected:", info.rejected);
-  }
-});
-
 // Send OTP email
 const sendOTPThroughEmail = async (
   userEmail: string,

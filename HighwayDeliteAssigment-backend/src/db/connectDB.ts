@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const DB = async (): Promise<void> => {
   try {
+
     if (!process.env.MONGODB_URI || !process.env.DB_NAME) {
       throw new Error("Missing MONGODB_URI or DB_NAME in environment variables");
     }

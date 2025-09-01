@@ -9,6 +9,8 @@ export interface IUser extends Document {
   otp?: string | null;
   otpExpires?: Date | null;
   refreshToken?: string | null;
+  googleId? : string | null;
+  authProvider: "google" | "email";
 }
 
 // Define the schema
@@ -38,6 +40,15 @@ const userSchema: Schema<IUser> = new Schema(
     refreshToken: {
       type: String,
       default: null,
+    },
+    googleId: {
+      type: String,
+      default: null,
+    },
+    authProvider: {
+      type: String,
+      enum: ["google", "email"],
+      required: true,
     },
   },
   { timestamps: true }
